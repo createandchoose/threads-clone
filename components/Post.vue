@@ -40,7 +40,7 @@
                     <img 
                         v-if="post && post.picture"
                         class="mx-auto w-full mt-2 pr-2 rounded" 
-                        :src="runtimeConfig.public.bucketUrl + post.picture" 
+                        :src="ass + post.picture" 
                     />
 
                     <div class="absolute mt-2 w-full ml-2">
@@ -98,6 +98,8 @@
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore()
 
+const ass = "https://zarsrubjubqpxsuasaln.supabase.co/storage/v1/object/public/threads-clone-files/"
+
 const runtimeConfig = useRuntimeConfig()
 let isMenu = ref(false)
 let isLike = ref(false)
@@ -131,7 +133,7 @@ const deletePost = async (id, picture) => {
         isDeleting.value = true
         const { data, error } = await client
             .storage
-            .from('threads-c-files')
+            .from('threads-clone-files')
             .remove([picture])
 
         await useFetch(`/api/delete-post/${id}`, { method: 'DELETE' })

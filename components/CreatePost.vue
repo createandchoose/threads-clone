@@ -122,7 +122,7 @@ const createPost = async () => {
     if (fileData.value) {
         const { data, error } = await client
             .storage
-            .from('threads-c-files')
+            .from('threads-clone-files')
             .upload(`${uuidv4()}.jpg`, fileData.value)
 
         dataOut = data;
